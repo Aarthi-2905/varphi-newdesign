@@ -28,7 +28,7 @@ export default function UserSidebar() {
 
   return (
     <>
-      <Sidebar className='w-full md:w-56 border-b-2 border-slate-400 shadow-custom-bottom flex flex-col'>
+      <Sidebar className='w-full md:w-56 border-b-2 border-slate-400 shadow-custom-bottom flex flex-col bg-[rgb(31,41,55)]'>
         <Sidebar.Items className='flex flex-col h-full'>
           <Sidebar.ItemGroup className='flex flex-col gap-1'>
             <Link to='/dashboard?tab=dash'>

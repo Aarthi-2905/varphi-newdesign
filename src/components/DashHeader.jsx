@@ -96,7 +96,7 @@ const Header = () => {
     };
 
     return (
-        <Navbar className='border-b-2 border-slate-400 shadow-custom-bottom bg-[rgb(31,41,55)]'>
+        <Navbar className='border-b-2 border-black  shadow-custom-bottom bg-[rgb(31,41,55)]'>
             <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl 
                 font-semibold text-white inline-flex mt-2 pl-5'>
                 <span>

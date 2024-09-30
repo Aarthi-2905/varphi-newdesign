@@ -144,9 +144,9 @@ const DashboardComp = () => {
         setIsLoading(true);
         try {
             // const data = await userPrompt(inputText);
-            const data = testmsg[1];
+            const data = testmsg[0];
             // console.log(data.image);
-            setMessages(prevMessages => [...prevMessages, { user: 'bot', response: data.response , details: data.detail,image : data.image}]);
+            setMessages(prevMessages => [...prevMessages, { user: 'bot', response: data.response , details: data.detail, image : data.image}]);
         } catch (error) {
             console.error('Error:', error);
             setMessages(prevMessages => [...prevMessages, { user: 'bot', response: 'Text submission failed' }]);
@@ -189,7 +189,7 @@ const DashboardComp = () => {
                     </div>
                 )}
                 {/* Chat window */}
-                <div className="flex-1 p-4 overflow-y-auto max-h-[73vh] scrollbar 
+                <div className="flex-1 h-full  p-4 overflow-y-auto scrollbar 
                      scrollbar-track-slate-700 scrollbar-thumb-slate-500">
                     <div className="flex flex-col space-y-3">
                         <div className="justify-center items-center mb-2">
@@ -199,11 +199,11 @@ const DashboardComp = () => {
                             <div key={index} className="flex flex-col space-x-2 items-start">
                                 <div className="flex items-center space-x-2 mx-10 text-gray-900 font-semibold">
                                     {message.user === 'user' ? (
-                                        <FaUserCircle size={24} className="text-blue-500" />  
+                                        <FaUserCircle size={26} className="text-blue-500 mr-8" />  
                                     ) : (
-                                        <FaRobot size={24} className="text-green-500 " />  
+                                        <FaRobot size={26} className="text-green-500 mr-8" />  
                                     )}
-                                    <div className="p-2 mb-2 rounded-lg shadow-custom-bottom bg-slate-800
+                                    <div className="p-2 mb-2  shadow-custom-bottom bg-[rgb(53,145,242)]  rounded-tr-xl rounded-bl-xl rounded-br-xl 
                                         text-white  break-all w-fit">  
                                         {Array.isArray(message.image) && message.image.length > 0 && (
                                             <div className="flex flex-wrap gap-4">
@@ -224,11 +224,11 @@ const DashboardComp = () => {
                                                 <Popover placement="right" 
                                                     content={
                                                         <div className="flex items-center justify-between content-between truncate text-center">
-                                                            <p className='px-3 py-2'>{message.details}</p>
+                                                            <p className='px-3 py-2 text-black'>{message.details}</p>
                                                         </div>
                                                     }
                                                 >
-                                                    <span className="text-blue-500 underline -ml-10 cursor-pointer text-xs">More details</span>
+                                                    <span className="text-black font-semibold underline -ml-10 cursor-pointer text-xs">More details</span>
                                                 </Popover>
                                             </div>
                                         )}
@@ -244,7 +244,7 @@ const DashboardComp = () => {
                     <div className="flex items-center space-x-4">
                         <form onSubmit={onSend} className="flex w-full space-x-4">
                             <Textarea  type="text" placeholder="Enter a prompt.."
-                                className="h-full overflow-y-auto scrollbar 
+                                className="h-full overflow-y-auto scrollbar bg-[rgb(31,41,55)] border-black text-white
                                  scrollbar-track-slate-700 scrollbar-thumb-slate-500"
                                 value={inputText} onChange={handleInputChange} 
                             />

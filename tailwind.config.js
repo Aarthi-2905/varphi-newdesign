@@ -27,9 +27,10 @@ export default {
             colors: {
             'primary': "#ECEEFF",
             "coral-red": "#FF4040",
-            "slate-gray": "#6D6D6D",
+            "slate-gray": "#1F2937",
             "pale-blue": "#F5F6FF",
-            "white-400": "rgba(255, 255, 255, 0.80)"
+            // "white-400": "rgba(255, 255, 255, 0.80)",
+            customColor: 'rgb(31,41,55)',
             },
             boxShadow: {
             'custom-bottom': '0 4px 10px rgba(0, 0, 0, 0.25)',
@@ -37,10 +38,11 @@ export default {
             'chatbot-shadow': '0 4px 10px rgba(225,225,225,0.40)',
             'custom-bottom-blue': '0 4px 10px rgba(0, 128, 128, 0.60)'
             },
-            backgroundColor:{
-                // customColor: 'rgba(248, 248, 250)',
-                customColor: 'rgb(31,41,55)',
-            }    
+            // backgroundColor:{
+            //     // customColor: 'rgba(248, 248, 250)',
+            //     // customColor: 'rgba(31,41,55)',
+                
+            // }    
         },
     },
     plugins: [flowbite.plugin(),require('tailwind-scrollbar')],

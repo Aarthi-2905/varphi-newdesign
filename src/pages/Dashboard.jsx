@@ -52,8 +52,8 @@ export default function Dashboard() {
     return (
         <>
             <DashHeader />
-            <div className='min-h-screen flex flex-col md:flex-row bg-[rgb(31,41,55)]'>
-                <div className='md:w-56 '>
+            <div className='min-h-screen flex flex-col md:flex-row bg-[rgb(16,23,42)] '>
+                <div className='flex h-screen '>
                     <DashSidebar />
                 </div>
                 {tab === 'users' && <DashUsers />}
