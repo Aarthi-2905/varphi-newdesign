@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, TextInput, Card } from 'flowbite-react';
 import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
-import Layout from '../components/Layout';
 import {loginUser} from '../fetch/SignIn';
 import Header from '../components/Header';
 import { jwtDecode } from 'jwt-decode';
 import {  HiX } from 'react-icons/hi';
-import { fetchStatus, setStatus } from "../utils/Auth";
+import { setStatus } from "../utils/Auth";
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -99,32 +98,35 @@ const SignIn = () => {
     
     return (
         <>
-            <Header />
-            <Layout hideButton={true}>
+            <Header hideSigninButton={true}/>
+            <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat bg-signinpage" 
+               
+            // className="flex items-center justify-center min-h-screen bg-[rgb(16,23,42)] bg-signinpage"
+            >
                 <div className='justify-centre items-center mb-4'>
                     {renderToast()}
                 </div>
-                <Card className='w-full max-w-sm  mt-12 '>
-                    <h2 className='font-bold  text-white text-4xl text-center mb-7'>Sign In</h2>
+                <Card className='w-full max-w-md max-h-max mt-12 text-center h-[50vh] mb-28'>
+                    <h2 className='font-bold  text-black text-4xl text-center mb-7'>Sign In</h2>
                     <form className='flex flex-col gap-6 mb-1 '  onSubmit={handleLoginForm}>
                         <div className="relative">
                             <TextInput type='email' placeholder='Email' id='email' required
                                 value={email} onChange={(e) => setEmail(e.target.value)}/>
-                            <FaUser className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white" />
+                            <FaUser className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black" />
                         </div>
                         <div className="relative">
                             <TextInput type={showPassword ? "text" : "password"} placeholder="Password" required
                                 value={password}  id="password" onChange={(e) => setPassword(e.target.value)} />
-                            <span onClick={handleTogglePassword} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white">
+                            <span onClick={handleTogglePassword} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black cursor-pointer">
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span> 
                         </div>
-                        <Button gradientMonochrome='success' type='submit' className='text-xl  mt-4'>
+                        <Button gradientDuoTone="purpleToBlue" type='submit' className='text-xl  mt-4'>
                             Sign In
                         </Button>
                     </form>
                 </Card>
-            </Layout>
+            </div>
         </>
     );
 };

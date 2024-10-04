@@ -51,7 +51,29 @@ const Header = () => {
                     throw new Error('Text submission failed');
                 }
                 const data = await response.json();
-                const returnValue = data.detail.map(item => `${item.file_name} from ${item.from} was ${item.status}`);
+                //  const data = {
+                //     "detail" : [
+                //         {
+                //             "email" :"user1@unwita.com",
+                //             "file_name" : "abc_seefdasefdzsvdzfvdzxfbfxbfdbgcdfbga.txt",
+                //             "from":"sdsd",
+                //             "status" : "accepted"
+                //         },
+                //         {
+                //             "email" :"admin@unwita.com",
+                //             "file_name" : "gdfsefvdvdzfvfdvdfvdfxvxfbfxgbfxgbfxgbfgbfgbfgbfxgbxfgbxfgbfgxbjh_dfsd_a.txt",
+                //             "from":"sdfgdsd",
+                //             "status" : "rejected"
+                //         }
+                //     ]
+                // }
+                const returnValue = data.detail.map(item => {
+                    if(item.from && item.status){
+                        return `${item.file_name} from ${item.from} was ${item.status}`;
+                    }else{
+                        return `${item.file_name} from ${item.email}`;
+                    }
+                });
                 setNotifications(returnValue);
             } catch (error) {
                 console.error('Error fetching notifications:', error);
@@ -110,7 +132,7 @@ const Header = () => {
                         content={
                             <div className="w-64 p-3">
                                 <div className="mb-3 flex justify-between ">
-                                    <span className="font-semibold  text-white">Notifications</span>
+                                    <span className="font-semibold  text-black">Notifications</span>
                                     <Button onClick={clearAllNotifications} color='gray' size={'22px'} 
                                         className="text-xs  text-blue-500 px-2">
                                         Clear All
@@ -119,8 +141,8 @@ const Header = () => {
                                 <ul>
                                     {notifications.map((notification, index) => (
                                         <li key={index} className="mb-2 flex justify-between items-center ">
-                                            <span className="text-sm  text-gray-200 mt-3 p-3 break-all">{notification}</span>
-                                            <FaTimes className="text-gray-400 hover:text-red-500 cursor-pointer flex-shrink-0"
+                                            <span className="text-sm  text-black mt-3 p-3 break-all">{notification}</span>
+                                            <FaTimes className="text-black-400 hover:text-red-500 cursor-pointer flex-shrink-0"
                                                 onClick={() => clearNotification(index)}
                                             />
                                         </li>
@@ -132,10 +154,12 @@ const Header = () => {
                             </div>
                         }
                     >
-                        <Button className='w-15 h-10 hidden sm:inline py-0 focus:ring-4 focus:ring-sky-400 focus:outline-none' color='gray' pill>
+                        <Button className='w-15 h-10 hidden sm:inline focus:ring-4 focus:ring-sky-400
+                             bg-gray-800 text-white border-none' color='gray' pill>
                             <FaBell />
                             {notifications.length > 0 && (
-                                <span className='absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full'>
+                                <span className='absolute top-0 right-0 inline-flex items-center justify-center
+                                 px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full'>
                                     {notifications.length}
                                 </span>
                             )}

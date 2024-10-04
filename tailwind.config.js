@@ -31,6 +31,8 @@ export default {
             "pale-blue": "#F5F6FF",
             // "white-400": "rgba(255, 255, 255, 0.80)",
             customColor: 'rgb(31,41,55)',
+            customGreen: 'rgba(46, 178, 0, 1)',
+            customRed: 'rgba(255, 107, 107, 1)',
             },
             boxShadow: {
             'custom-bottom': '0 4px 10px rgba(0, 0, 0, 0.25)',
@@ -42,7 +44,11 @@ export default {
             //     // customColor: 'rgba(248, 248, 250)',
             //     // customColor: 'rgba(31,41,55)',
                 
-            // }    
+            // }   
+            backgroundImage: {
+                'landingpage': "url('./src/assets/landing_page.png')",
+                'signinpage': "url('./src/assets/signin_page.png')", 
+            }, 
         },
     },
     plugins: [flowbite.plugin(),require('tailwind-scrollbar')],

@@ -8,6 +8,17 @@ import { setRole } from '../utils/Auth';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function DashUsers() {
+    // const dummyUsers = [
+    //     { date: '2023-01-01', username: 'user1', email: 'user1@example.com', role: 'Super Admin' },
+    //     { date: '2023-02-01', username: 'user2', email: 'user2@example.com', role: 'User' },
+    //     { date: '2023-03-01', username: 'user3', email: 'user3@example.com', role: 'Admin' },
+    //     { date: '2023-04-01', username: 'user4', email: 'user4@example.com', role: 'User' },
+    //     { date: '2023-01-01', username: 'user1', email: 'user1@example.com', role: 'Super Admin' },
+    //     { date: '2023-02-01', username: 'user2', email: 'user2@example.com', role: 'User' },
+    //     { date: '2023-03-01', username: 'user3', email: 'user3@example.com', role: 'Admin' },
+ 
+        
+    // ];
     const [data, setData] = useState([]);
     const navigate = useNavigate();
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -60,6 +71,7 @@ export default function DashUsers() {
                     throw new Error('Network response was not ok');
                 }
                 setData(data);  
+                // setData(dummyUsers);
             } catch (error) {
                 console.error("Failed to fetch users:", error);
                 setToast({
@@ -283,21 +295,20 @@ export default function DashUsers() {
         );
     };
     return (
-        <div className="table-auto w-[83vw] md:mx-auto p-3">
+        <div className="table-auto w-[73vw] md:mx-auto p-3 m-5 ">
             <div className="flex justify-between mb-4">
-           
-                <Button gradientMonochrome="success" className="shadow-custom-bottom" onClick={openAddUserModal}>
+                <Button gradientDuoTone="purpleToBlue"  
+                className="shadow-custom-bottom" onClick={openAddUserModal}>
                     Add User
                 </Button>
                 <TextInput value={globalFilter || ''}  placeholder="Search users"  icon={HiSearch}
                     onChange={(e) => setGlobalFilter(e.target.value || undefined)}
-                    className="max-w-md rounded-lg shadow-custom-bottom"
                 />
             </div>
             <div className='justify-centre items-center mb-4'>
                 {renderToast()}
             </div>
-            <Table hoverable className="shadow-md">
+            <Table hoverable className="shadow-md ">
                 <Table.Head>
                     <Table.HeadCell className=' bg-gray-700 text-white'>Date created</Table.HeadCell>
                     <Table.HeadCell className=' bg-gray-700 text-white'>Username</Table.HeadCell>
@@ -310,7 +321,8 @@ export default function DashUsers() {
                     {page.map((row) => {
                         prepareRow(row);
                         return (
-                            <Table.Row key={row.id} className="bg-white text-gray-800  border-gray-700 bg-gray-800">
+                            <Table.Row key={row.id}  className=" text-white  border-gray-700 bg-gray-800 
+                                hover:bg-[rgb(168,224,255,1)] hover:text-black">
                                 {row.cells.map((cell) => {
                                     const { key, ...cellProps } = cell.getCellProps(); // Destructure to remove the key
                                     return (
@@ -324,26 +336,32 @@ export default function DashUsers() {
                     })}
                 </Table.Body>
             </Table>
-            <div className="flex justify-end items-center mt-4 gap-3">
+            <div className="flex justify-end items-center mt-4 gap-3 text-white">
                 <Button onClick={() => previousPage()} disabled={!canPreviousPage} 
-                    gradientDuoTone="purpleToBlue" outline >
+                    gradientDuoTone="purpleToBlue"  outline>
                     Previous    
                 </Button>
                 <span> Page {pageIndex + 1} of {pageOptions.length} </span>
-                <Button onClick={() => nextPage()} disabled={!canNextPage} gradientDuoTone="purpleToBlue" outline>
+                <Button onClick={() => nextPage()} disabled={!canNextPage} 
+                    gradientDuoTone="purpleToBlue" outline>
                     Next
                 </Button>
             </div>
 
-            <Modal show={isConfirmModalOpen} onClose={closeConfirmModal} popup size="md">
+            <Modal show={isConfirmModalOpen} onClose={closeConfirmModal} popup size="lg">
                 <Modal.Header />
                 <Modal.Body>
                     <div className="text-center">
-                        <HiOutlineExclamationCircle className="h-14 w-14  text-gray-200 mb-4 mx-auto" />
-                        <h3 className="mb-5 text-lg  text-gray-400">
+                        <h1 className='text-black font-bold text-xl'>Delete File</h1>
+                        <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 m-9 rounded-sm" role="alert">
+                            <p className="font-bold">Be Warned</p>
+                            <p>Something not ideal might be happening.</p>
+</                      div>
+                        {/* <HiOutlineExclamationCircle className="h-14 w-14  text-gray-200 mb-4 mx-auto" /> */}
+                        <h3 className="mb-5 text-lg  text-black">
                             Are you sure you want to delete this user?
                         </h3>
-                        <div className="flex justify-center gap-4">
+                        <div className="flex justify-center gap-4 m-5">
                             <Button color="failure" onClick={handleDelete}>
                                 Yes, I'm sure
                             </Button>
@@ -359,8 +377,8 @@ export default function DashUsers() {
             <Modal show={isEditModalOpen} onClose={closeEditModal} popup size="md">
                 <Modal.Header />
                 <Modal.Body>
-                    <div className="text-center">
-                        <h3 className="mb-5 text-lg  font-semibold text-gray-400">
+                    <div className="text-center p-5">
+                        <h3 className="mb-5 text-lg  font-semibold text-black">
                             Edit User
                         </h3>
                         <TextInput value={editUser.username}  placeholder="Username" className="mb-4"
@@ -373,10 +391,13 @@ export default function DashUsers() {
                             <option value="super_admin">Super Admin</option>
                         </Select>
                         <div className="flex justify-center gap-4">
-                            <Button  gradientMonochrome="success" onClick={handleEdit}>
-                                Save Changes
+                            <Button  gradientDuoTone="purpleToBlue" onClick={handleEdit}>
+                                Save Change
                             </Button>
-                            <Button color="gray" onClick={closeEditModal}>
+                            <Button class="text-white bg-gradient-to-r from-red-400 via-red-500
+                             to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none
+                              focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg 
+                              text-sm px-4  text-center" onClick={closeEditModal}>
                                 Cancel
                             </Button>
                         </div>
@@ -385,10 +406,10 @@ export default function DashUsers() {
             </Modal>
 
             {/* Add User Modal */}
-            <Modal show={isAddUserModalOpen} onClose={closeAddUserModal} popup size="md">
+            <Modal show={isAddUserModalOpen} onClose={closeAddUserModal} popup size="md" className='bg-slate-50'>
                 <Modal.Header />
                 <Modal.Body>
-                    <div className="text-center">
+                    <div className="text-center p-5">
                         <h3 className="mb-5 text-lg  font-semibold text-gray-400">
                             Add User
                         </h3>
@@ -410,7 +431,7 @@ export default function DashUsers() {
                                 onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                             />
                             <span onClick={handleTogglePassword}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2  text-white"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2  text-black cursor-pointer"
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span>
@@ -422,17 +443,21 @@ export default function DashUsers() {
                                 onChange={(e) => setNewUser({ ...newUser, confirmPassword: e.target.value })}
                             />
                             <span onClick={handleTogglePassword}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2  text-white"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2  text-black cursor-pointer"
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span>
                         </div>
 
-                        <div className="flex justify-center gap-4">
-                            <Button gradientMonochrome="success" onClick={handleAddUser}>
+                        <div className="flex justify-center gap-4 m-2 mt-7">
+                            <Button gradientDuoTone="purpleToBlue" onClick={handleAddUser}>
                                 Add User
                             </Button>
-                            <Button color="gray" onClick={closeAddUserModal}>
+                            <Button class="text-white bg-gradient-to-r from-red-400 via-red-500
+                             to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none
+                              focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg 
+                              text-sm px-4  text-center"
+                             onClick={closeAddUserModal}>
                                 Cancel
                             </Button>
                         </div>

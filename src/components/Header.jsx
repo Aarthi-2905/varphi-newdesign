@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 
-const Header = () => {
+const Header = ({ hideSigninButton }) => {
     const path = useLocation().pathname;
   
     return (
@@ -18,20 +18,22 @@ const Header = () => {
                 </span>
                 Varphi KBI
             </Link>
-            <div className='flex gap-2 md:order-2 pr-6'>
-                <Link to='/sign-in'>
-                    <Button gradientDuoTone="purpleToBlue">Sign In</Button>
-                </Link>
-                <NavbarToggle></NavbarToggle>
-            </div>
+            {!hideSigninButton && (
+                <div className='flex gap-2 md:order-2 pr-6'>
+                    <Link to='/sign-in'>
+                        <Button gradientDuoTone="purpleToBlue">Sign In</Button>
+                    </Link>
+                    <NavbarToggle></NavbarToggle>
+                </div>
+            )}
+             {hideSigninButton && (
             <NavbarCollapse>
                 <NavbarLink active={path === '/'} as={'div'} className='text-lg text-white'>
                     <Link to='/'>Home</Link>
                 </NavbarLink>
-                <NavbarLink active={path === '/about'} as={'div'} className='text-lg text-white'>
-                    <Link to='/about'>About</Link>
-                </NavbarLink>
+
             </NavbarCollapse>
+             )}
         </Navbar>
     );
 };
